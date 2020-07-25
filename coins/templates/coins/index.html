@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
+{% load static %}
 <head>
   <meta charset="utf-8">
   <title>Coins</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript">
+      // A CSRF token is required when making post requests in Django
+      // To be used for making AJAX requests in script.js
+      window.CSRF_TOKEN = "{{ csrf_token }}";
+  </script>
+  <script src="{% static 'coins/js/index.js' %}" charset="utf-8"></script>
 </head>
 
 <body>
-  <div class="container py-5">
-    <table class="table">
+  <div class="container py-5" >
+    <table class="table" id="coins-table">
       <thead class="thead-light">
         <tr>
           {% for field in fields %}
@@ -21,7 +27,7 @@
         {% include 'coins/coins.html' %}
       </tbody>
     </table>
-    <button type="button" name="button" class="btn btn-block btn-primary">Load more</button>
+    <button type="button" id="load-more-btn" data-page="2" class="btn btn-block btn-primary">Load more</button>
   </div>
 
 </body>

@@ -1,3 +1,6 @@
+from django.template import loader
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Coin
 
@@ -15,7 +18,7 @@ def index(request):
 
 def load_coins(request):
     page = request.POST.get('page')
-    coins = Coin.objects.order_by('-social-score')
+    coins = Coin.objects.order_by('-social_score')
 
     results_per_page = 10
     paginator = Paginator(coins, results_per_page)
@@ -30,5 +33,5 @@ def load_coins(request):
     coins_html = loader.render_to_string('coins/coins.html', {'coins': coins})
 
     # Package output data and return it as a JSON object
-    output = {'coins_html': coins_html, 'has_another': posts.has_next()}
+    output = {'coins_html': coins_html, 'has_another': coins.has_next()}
     return JsonResponse(output)
