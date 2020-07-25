@@ -6,7 +6,7 @@ class Coin(models.Model):
     name = models.CharField(max_length=64)
     symbol = models.CharField(max_length=64)
     price = models.FloatField(default=0)
-    likes = models.IntegerField(default=0)
+    social_score = models.FloatField(default=0)
     market_cap = models.FloatField(default=0)
 
     def __str__(self):
