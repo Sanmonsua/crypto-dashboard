@@ -1,0 +1,10 @@
+{% for coin in coins %}
+<tr>
+  <th scope="row">{{coin.id}}</th>
+  <td>{{coin.name}}</td>
+  <td>{{coin.symbol}}</td>
+  <td>{{coin.price}}</td>
+  <td>{{coin.social_score}}</td>
+  <td>{{coin.market_cap}}</td>
+</tr>
+{% endfor %}
