@@ -4,5 +4,5 @@ from coins_updater import api
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(api.update_coins, 'cron', hour=0, minute=0)
+    scheduler.add_job(api.update_coins, 'interval', hours=8)
     scheduler.start()
