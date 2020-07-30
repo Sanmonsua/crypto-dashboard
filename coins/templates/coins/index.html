@@ -10,13 +10,18 @@
       // To be used for making AJAX requests in script.js
       window.CSRF_TOKEN = "{{ csrf_token }}";
   </script>
+  <style media="screen">
+    body{
+      background-color: #212529;
+    }
+  </style>
   <script src="{% static 'coins/js/index.js' %}" charset="utf-8"></script>
 </head>
 
 <body>
   <div class="container py-5" >
-    <table class="table" id="coins-table">
-      <thead class="thead-light">
+    <table class="table table-dark" id="coins-table">
+      <thead class="thead-dark">
         <tr>
           <th>Id</th>
           <th>Name</th>

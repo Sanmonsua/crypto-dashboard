@@ -1,13 +1,31 @@
-<tbody>
+<div>
   {% for coin in coins %}
   <tr>
     <th scope="row">{{coin.id}}</th>
     <td>{{coin.name}}</td>
     <td>{{coin.symbol}}</td>
-    <td>$ {{coin.price|floatformat:4}} <span class="text-muted">{{coin.price_change|floatformat:2}}</span></td>
-    <td>{{coin.social_score}} <span class="text-muted">{{coin.social_score_change|floatformat:2}}</span></td>
-    <td>$ {{coin.market_cap|floatformat:4}} <span class="text-muted">{{coin.market_cap_change|floatformat:2}}</span></td>
-    <td></td>
+    <td>$ {{coin.price|floatformat:4}}
+      {% if coin.price_change > 0 %}
+        <span class="text-success">+{{coin.price_change|floatformat:1}}%</span>
+      {% elif coin.price_change < 0 %}
+        <span class="text-danger">{{coin.price_change|floatformat:1}}%</span>
+      {% endif %}
+    </td>
+    <td>{{coin.social_score}}
+      {% if coin.social_score_change > 0 %}
+        <span class="text-success">+{{coin.social_score_change|floatformat:1}}%</span>
+      {% elif coin.social_score_change < 0 %}
+        <span class="text-danger">{{coin.social_score_change|floatformat:1}}%</span>
+      {% endif %}
+    </td>
+    <td>$ {{coin.market_cap|floatformat:4}}
+      {% if coin.market_cap_change > 0 %}
+        <span class="text-success">+{{coin.market_cap_change|floatformat:1}}%</span>
+      {% elif coin.market_cap_change < 0 %}
+        <span class="text-danger">{{coin.market_cap_change|floatformat:1}}%</span>
+      {% endif %}
+    </td>
+
   </tr>
   {% endfor %}
-</tbody>
+</div>

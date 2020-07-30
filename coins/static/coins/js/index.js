@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () =>{
     const request = new XMLHttpRequest();
     request.open('POST', 'load_coins');
 
+    const x = pageXOffset;
+    const y = pageYOffset;
+
     const page = this.dataset.page;
 
     request.onload = () =>{
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       }
 
       document.querySelector('#coins-table').innerHTML += data.coins_html;
-
+      scrollTo(x, y);
 
     }
 
