@@ -33,21 +33,21 @@ def update_coins():
             if coin_base_data is not None:
                 try:
                     coin = Coin.objects.get(pk=coin_base_data['id'])
-                    if coin.price == 0:
-                        coin.price_change = None
-                    else:
+                    if coin.price != 0:
                         coin.price_change = (coin_base_data['market_data']['current_price']['usd']-coin.price) / coin.price * 100
                     coin.price = coin_base_data['market_data']['current_price']['usd']
-                    if coin.market_cap == 0:
-                        coin.market_cap_change = None
-                    else:
+                    if coin.price_btc != 0:
+                        coin.price_btc_change = (coin_base_data['market_data']['current_price']['btc']-coin.price_btc) / coin.price_btc * 100
+                    coin.price_btc = coin_base_data['market_data']['current_price']['btc']
+                    if coin.market_cap != 0:
                         coin.market_cap_change = (coin_base_data['market_data']['market_cap']['usd']-coin.market_cap) / coin.market_cap * 100
                     coin.market_cap = coin_base_data['market_data']['market_cap']['usd']
-                    if coin.social_score == 0:
-                        coin.social_score_change = None
-                    else:
+                    if coin.social_score != 0:
                         coin.social_score_change = (coin_base_data['public_interest_score']-coin.social_score) / coin.social_score * 100
                     coin.social_score = coin_base_data['public_interest_score']
+                    if coin.total_volume != 0:
+                        coin.total_volume_change = (coin_base_data['market_data']['total_volume']['usd']-coin.total_volume) / coin.total_volume * 100
+                    coin.total_volume = coin_base_data['market_data']['total_volume']['usd']
                     coin.save()
                     print(f"{coin.id} updated")
                 except ObjectDoesNotExist:
@@ -57,8 +57,11 @@ def update_coins():
                             symbol = coin_base_data['symbol'],
                             name = coin_base_data['name'],
                             price = coin_base_data['market_data']['current_price']['usd'],
+                            price_btc = coin_base_data['market_data']['current_price']['btc'],
+                            total_volume = coin_base_data['market_data']['total_volume']['usd'],
                             market_cap = coin_base_data['market_data']['market_cap']['usd'],
                             social_score = coin_base_data['public_interest_score']
+
                         )
                         print(f"{coin.id} saved")
                         new_coin.save()
