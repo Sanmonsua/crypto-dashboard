@@ -30,4 +30,27 @@ document.addEventListener('DOMContentLoaded', () =>{
     request.send(data);
   }
 
+  document.querySelectorAll('.field').forEach( f =>{
+    f.onclick = function(){
+      redirectPost('', {'field':f.dataset.field, 'csrfmiddlewaretoken':window.CSRF_TOKEN});
+    }
+  })
+
 });
+
+function redirectPost(url, data) {
+    var form = document.createElement('form');
+    document.body.appendChild(form);
+    form.method = 'post';
+    form.action = url;
+    console.log(data['field'])
+    for (var name in data) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = data[name];
+        form.appendChild(input);
+    }
+    form.submit();
+    console.log('submited');
+}

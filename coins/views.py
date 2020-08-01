@@ -7,18 +7,22 @@ from .models import Coin
 # Create your views here.
 def index(request):
     # Get the first 10 coins ordered by social score descending
-    coins = Coin.objects.order_by('-social_score')[:10]
-    fields = [f.name for f in Coin._meta.get_fields()]
+    if request.method == 'GET':
+        coins = Coin.objects.order_by('-market_cap')[:10]
+    elif request.method == 'POST':
+        col = request.POST.get('field')
+        request.session['order_by'] = col
+        print(col)
+        coins = Coin.objects.order_by(f"{col}")[:10]
     context = {
-        "coins" : coins,
-        "fields" : fields
+        "coins" : coins
     }
     return render(request, 'coins/index.html', context = context)
 
 
 def load_coins(request):
     page = request.POST.get('page')
-    coins = Coin.objects.order_by('-social_score')
+    coins = Coin.objects.order_by(f"{request.session['order_by']}")
 
     results_per_page = 10
     paginator = Paginator(coins, results_per_page)

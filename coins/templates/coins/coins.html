@@ -1,9 +1,120 @@
 <div>
   {% for coin in coins %}
+  {% if coin.price_change > 10 or coin.price_btc_change > 10 or coin.social_score_change > 10 or coin.market_cap_change > 10 or coin.total_volume_change > 10%}
+  <tr class="bg-success">
+    <td>{{coin.symbol}}</td>
+    <td class="alnright">$ {{coin.price|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.price_change > 0 %}
+      <span>+{{coin.price_change|floatformat:1}}%</span>
+      {% elif coin.price_change < 0 %}
+      <span>{{coin.price_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.price_btc|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.price_btc_change > 0 %}
+        <span>+{{coin.price_btc_change|floatformat:1}}%</span>
+      {% elif coin.price_btc_change < 0 %}
+        <span>{{coin.price_btc_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">{{coin.social_score|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.social_score_change > 0 %}
+        <span>+{{coin.social_score_change|floatformat:1}}%</span>
+      {% elif coin.social_score_change < 0 %}
+        <span>{{coin.social_score_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.market_cap|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.market_cap_change > 0 %}
+        <span>+{{coin.market_cap_change|floatformat:1}}%</span>
+      {% elif coin.market_cap_change < 0 %}
+        <span>{{coin.market_cap_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.total_volume|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.total_volume_change > 0 %}
+        <span>+{{coin.total_volume_change|floatformat:1}}%</span>
+      {% elif coin.total_volume_change < 0 %}
+        <span>{{coin.total_volume_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+
+  </tr>
+  {% elif  coin.price_change < -10 or coin.price_btc_change < -10 or coin.social_score_change < -10 or coin.market_cap_change < -10 or coin.total_volume_change < -10%}
+  <tr class="bg-danger">
+    <td >{{coin.symbol}}</td>
+    <td class="alnright">$ {{coin.price|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.price_change > 0 %}
+      <span>+{{coin.price_change|floatformat:1}}%</span>
+      {% elif coin.price_change < 0 %}
+      <span>{{coin.price_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.price_btc|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.price_btc_change > 0 %}
+        <span>+{{coin.price_btc_change|floatformat:1}}%</span>
+      {% elif coin.price_btc_change < 0 %}
+        <span>{{coin.price_btc_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">{{coin.social_score|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.social_score_change > 0 %}
+        <span>+{{coin.social_score_change|floatformat:1}}%</span>
+      {% elif coin.social_score_change < 0 %}
+        <span>{{coin.social_score_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.market_cap|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.market_cap_change > 0 %}
+        <span>+{{coin.market_cap_change|floatformat:1}}%</span>
+      {% elif coin.market_cap_change < 0 %}
+        <span>{{coin.market_cap_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td class="alnright">$ {{coin.total_volume|floatformat:2}}</td>
+    <td class="alnright">
+      {% if coin.total_volume_change > 0 %}
+        <span>+{{coin.total_volume_change|floatformat:1}}%</span>
+      {% elif coin.total_volume_change < 0 %}
+        <span>{{coin.total_volume_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+
+  </tr>
+  {% else %}
   <tr>
     <td>{{coin.symbol}}</td>
-    <td>$ {{coin.price|floatformat:4}}</td>
-    <td>
+    <td class="alnright">$ {{coin.price|floatformat:2}}</td>
+    <td class="alnright">
       {% if coin.price_change > 0 %}
       <span class="text-success">+{{coin.price_change|floatformat:1}}%</span>
       {% elif coin.price_change < 0 %}
@@ -12,8 +123,8 @@
       0
       {% endif %}
     </td>
-    <td>$ {{coin.price_btc}}</td>
-    <td>
+    <td class="alnright">$ {{coin.price_btc|floatformat:2}}</td>
+    <td class="alnright">
       {% if coin.price_btc_change > 0 %}
         <span class="text-success">+{{coin.price_btc_change|floatformat:1}}%</span>
       {% elif coin.price_btc_change < 0 %}
@@ -22,8 +133,8 @@
       0
       {% endif %}
     </td>
-    <td>{{coin.social_score}}</td>
-    <td>
+    <td class="alnright">{{coin.social_score|floatformat:2}}</td>
+    <td class="alnright">
       {% if coin.social_score_change > 0 %}
         <span class="text-success">+{{coin.social_score_change|floatformat:1}}%</span>
       {% elif coin.social_score_change < 0 %}
@@ -32,8 +143,8 @@
       0
       {% endif %}
     </td>
-    <td>$ {{coin.market_cap|floatformat:4}}</td>
-    <td>
+    <td class="alnright">$ {{coin.market_cap|floatformat:2}}</td>
+    <td class="alnright">
       {% if coin.market_cap_change > 0 %}
         <span class="text-success">+{{coin.market_cap_change|floatformat:1}}%</span>
       {% elif coin.market_cap_change < 0 %}
@@ -42,8 +153,8 @@
       0
       {% endif %}
     </td>
-    <td>$ {{coin.total_volume}}</td>
-    <td>
+    <td class="alnright">$ {{coin.total_volume|floatformat:2}}</td>
+    <td class="alnright">
       {% if coin.total_volume_change > 0 %}
         <span class="text-success">+{{coin.total_volume_change|floatformat:1}}%</span>
       {% elif coin.total_volume_change < 0 %}
@@ -54,5 +165,7 @@
     </td>
 
   </tr>
+  {% endif %}
+
   {% endfor %}
 </div>

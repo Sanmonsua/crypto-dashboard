@@ -10,30 +10,27 @@
       // To be used for making AJAX requests in script.js
       window.CSRF_TOKEN = "{{ csrf_token }}";
   </script>
-  <style media="screen">
-    body{
-      background-color: #212529;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'coins/css/master.css' %}">
   <script src="{% static 'coins/js/index.js' %}" charset="utf-8"></script>
 </head>
 
 <body>
   <div class="container py-5" >
-    <table class="table table-dark" id="coins-table">
+    {%csrf_token%}
+    <table class="table table-hover table-sm table-dark" id="coins-table">
       <thead class="thead-dark">
         <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>Price Change</th>
-          <th>Price Btc</th>
-          <th>Price Btc Change</th>
-          <th>Social Score</th>
-          <th>Social Score Change</th>
-          <th>Market Cap</th>
-          <th>Market Cap Change</th>
-          <th>Total Volume</th>
-          <th>Total Volume Change</th>
+          <th><button type="button" class="btn field" data-field="symbol">Symbol</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-price">USD</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-price_change">Change</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-price_btc">BTC</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-price_btc_change">Change</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-social_score">Social Score</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-social_score_change">Change</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-market_cap">Market Cap</button></th>
+          <th><button type="button" class="btn field"href="" data-field="-market_cap_change">Change</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-total_volume">Total Volume</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-total_volume_change">Change</button></th>
         </tr>
       </thead>
       <tbody>
