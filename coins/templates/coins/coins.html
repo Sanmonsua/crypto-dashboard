@@ -1,28 +1,55 @@
 <div>
   {% for coin in coins %}
   <tr>
-    <th scope="row">{{coin.id}}</th>
-    <td>{{coin.name}}</td>
     <td>{{coin.symbol}}</td>
-    <td>$ {{coin.price|floatformat:4}}
+    <td>$ {{coin.price|floatformat:4}}</td>
+    <td>
       {% if coin.price_change > 0 %}
-        <span class="text-success">+{{coin.price_change|floatformat:1}}%</span>
+      <span class="text-success">+{{coin.price_change|floatformat:1}}%</span>
       {% elif coin.price_change < 0 %}
-        <span class="text-danger">{{coin.price_change|floatformat:1}}%</span>
+      <span class="text-danger">{{coin.price_change|floatformat:1}}%</span>
+      {% else %}
+      0
       {% endif %}
     </td>
-    <td>{{coin.social_score}}
+    <td>$ {{coin.price_btc}}</td>
+    <td>
+      {% if coin.price_btc_change > 0 %}
+        <span class="text-success">+{{coin.price_btc_change|floatformat:1}}%</span>
+      {% elif coin.price_btc_change < 0 %}
+        <span class="text-danger">{{coin.price_btc_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td>{{coin.social_score}}</td>
+    <td>
       {% if coin.social_score_change > 0 %}
         <span class="text-success">+{{coin.social_score_change|floatformat:1}}%</span>
       {% elif coin.social_score_change < 0 %}
         <span class="text-danger">{{coin.social_score_change|floatformat:1}}%</span>
+      {% else %}
+      0
       {% endif %}
     </td>
-    <td>$ {{coin.market_cap|floatformat:4}}
+    <td>$ {{coin.market_cap|floatformat:4}}</td>
+    <td>
       {% if coin.market_cap_change > 0 %}
         <span class="text-success">+{{coin.market_cap_change|floatformat:1}}%</span>
       {% elif coin.market_cap_change < 0 %}
         <span class="text-danger">{{coin.market_cap_change|floatformat:1}}%</span>
+      {% else %}
+      0
+      {% endif %}
+    </td>
+    <td>$ {{coin.total_volume}}</td>
+    <td>
+      {% if coin.total_volume_change > 0 %}
+        <span class="text-success">+{{coin.total_volume_change|floatformat:1}}%</span>
+      {% elif coin.total_volume_change < 0 %}
+        <span class="text-danger">{{coin.total_volume_change|floatformat:1}}%</span>
+      {% else %}
+      0
       {% endif %}
     </td>
 
