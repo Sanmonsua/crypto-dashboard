@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () =>{
       } else{
         this.setAttribute('hidden', 'true');
       }
-
-      document.querySelector('#coins-table').innerHTML += data.coins_html;
+      console.log(data.coins_html);
+      document.querySelector('#coins-list').innerHTML += data.coins_html;
       scrollTo(x, y);
 
     }

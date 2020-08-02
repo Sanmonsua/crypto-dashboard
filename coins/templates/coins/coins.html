@@ -1,5 +1,4 @@
-<div>
-  {% for coin in coins %}
+{% for coin in coins %}
   {% if coin.price_change > 10 or coin.price_btc_change > 10 or coin.social_score_change > 10 or coin.market_cap_change > 10 or coin.total_volume_change > 10%}
   <tr class="bg-success">
     <td>{{coin.symbol}}</td>
@@ -167,5 +166,4 @@
   </tr>
   {% endif %}
 
-  {% endfor %}
-</div>
+{% endfor %}

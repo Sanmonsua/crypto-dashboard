@@ -17,7 +17,7 @@
 <body>
   <div class="container py-5" >
     {%csrf_token%}
-    <table class="table table-hover table-sm table-dark" id="coins-table">
+    <table class="table table-hover table-sm table-dark">
       <thead class="thead-dark">
         <tr>
           <th><button type="button" class="btn field" data-field="symbol">Symbol</button></th>
@@ -33,7 +33,7 @@
           <th><button type="button" class="btn field" href="" data-field="-total_volume_change">Change</button></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id='coins-list'>
         {% include 'coins/coins.html' %}
       </tbody>
     </table>

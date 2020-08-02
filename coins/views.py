@@ -9,9 +9,10 @@ def index(request):
     # Get the first 10 coins ordered by social score descending
     if request.method == 'GET':
         try :
-            coins = Coin.objects.order_by(f"{request.session['order_by']}")[:10]
+            coins = Coin.objects.order_by(f"{request.session['order_by']}")
         except KeyError:
-            coins = Coin.objects.order_by('-market_cap')[:10]
+            request.session['order_by']
+            coins = Coin.objects.order_by('-market_cap')
     elif request.method == 'POST':
         order_by = request.POST.get('field')
         request.session['order_by'] = order_by
@@ -24,6 +25,7 @@ def index(request):
 
 def load_coins(request):
     page = request.POST.get('page')
+
     coins = Coin.objects.order_by(f"{request.session['order_by']}")
 
     results_per_page = 10
