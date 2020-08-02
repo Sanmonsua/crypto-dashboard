@@ -8,12 +8,14 @@ from .models import Coin
 def index(request):
     # Get the first 10 coins ordered by social score descending
     if request.method == 'GET':
-        coins = Coin.objects.order_by('-market_cap')[:10]
+        try :
+            coins = Coin.objects.order_by(f"{request.session['order_by']}")[:10]
+        except KeyError:
+            coins = Coin.objects.order_by('-market_cap')[:10]
     elif request.method == 'POST':
-        col = request.POST.get('field')
-        request.session['order_by'] = col
-        print(col)
-        coins = Coin.objects.order_by(f"{col}")[:10]
+        order_by = request.POST.get('field')
+        request.session['order_by'] = order_by
+        coins = Coin.objects.order_by(f"{request.session['order_by']}")[:10]
     context = {
         "coins" : coins
     }
