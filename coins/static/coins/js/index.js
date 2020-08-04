@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () =>{
+  document.querySelector('#search-coins-field').onkeyup = ()=>{
+    value = document.querySelector('#search-coins-field').value;
+    document.querySelector('#search-content-holder').setAttribute('hidden', true);
+    document.querySelector('#search-content').innerHTML = value;
+    search(value);
+    if (value.length > 0){
+      document.querySelector('#search-content-holder').removeAttribute('hidden');
+    }
+  }
 
   document.querySelector('#load-more-btn').onclick = function () {
     const request = new XMLHttpRequest();
@@ -53,4 +62,25 @@ function redirectPost(url, data) {
     }
     form.submit();
     console.log('submited');
+}
+
+function search(value){
+  const request = new XMLHttpRequest();
+  request.open('POST', 'search');
+
+  request.onload = () =>{
+    const data = JSON.parse(request.responseText);
+
+    if (!data.has_another){
+      document.querySelector('#load-more-btn').setAttribute('hidden', 'true');
+    } else{
+      document.querySelector('#load-more-btn').removeAttribute('hidden');
+    }
+    console.log(data.coins_html);
+    document.querySelector('#coins-list').innerHTML = data.coins_html;
+  }
+  const data = new FormData()
+  data.append('csrfmiddlewaretoken', window.CSRF_TOKEN);
+  data.append('search', value)
+  request.send(data);
 }

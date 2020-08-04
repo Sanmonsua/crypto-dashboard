@@ -29,6 +29,7 @@ def update_coins():
     coins_list = get_coins_list()
     if coins_list is not None:
         for coin_data in coins_list:
+            print(coin_data)
             coin_base_data = get_coin_base_data(coin_data['id'])
             if coin_base_data is not None:
                 try:
@@ -63,7 +64,7 @@ def update_coins():
                             social_score = coin_base_data['public_interest_score']
 
                         )
-                        print(f"{coin.id} saved")
+                        print(f"{new_coin.id} saved")
                         new_coin.save()
                     except:
                         pass

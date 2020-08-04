@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 {% load static %}
+
 <head>
   <meta charset="utf-8">
   <title>Coins</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="text/javascript">
-      // A CSRF token is required when making post requests in Django
-      // To be used for making AJAX requests in script.js
-      window.CSRF_TOKEN = "{{ csrf_token }}";
+    // A CSRF token is required when making post requests in Django
+    // To be used for making AJAX requests in script.js
+    window.CSRF_TOKEN = "{{ csrf_token }}";
   </script>
   <link rel="stylesheet" href="{% static 'coins/css/master.css' %}">
   <script src="{% static 'coins/js/index.js' %}" charset="utf-8"></script>
 </head>
 
 <body>
-  <div class="container py-5" >
-    {%csrf_token%}
-    <table class="table table-hover table-sm table-dark">
+  <div class="container py-5">
+    <div class="input-group mb-3">
+      <input type="text" value="{{search}}" class="form-control bg-dark text-white" style="border:none; border-radius:15px;" id="search-coins-field" placeholder="Search coins..." aria-label="Search coins...">
+    </div>
+    {% if search %}
+      <p class="text-white text-muted text-center" id="search-content-holder">Showing results for <span id="search-content">{{search}}</span></p>
+    {% else %}
+      <p hidden class="text-white text-muted text-center" id="search-content-holder">Showing results for <span id="search-content">{{search}}</span></p>
+    {% endif %}
+    <table class="table table-hover table-sm table-dark table-bordered">
       <thead class="thead-dark">
         <tr>
           <th><button type="button" class="btn field" data-field="symbol">Symbol</button></th>
@@ -28,7 +36,7 @@
           <th><button type="button" class="btn field" href="" data-field="-social_score">Social Score</button></th>
           <th><button type="button" class="btn field" href="" data-field="-social_score_change">Change</button></th>
           <th><button type="button" class="btn field" href="" data-field="-market_cap">Market Cap</button></th>
-          <th><button type="button" class="btn field"href="" data-field="-market_cap_change">Change</button></th>
+          <th><button type="button" class="btn field" href="" data-field="-market_cap_change">Change</button></th>
           <th><button type="button" class="btn field" href="" data-field="-total_volume">Total Volume</button></th>
           <th><button type="button" class="btn field" href="" data-field="-total_volume_change">Change</button></th>
         </tr>
@@ -37,7 +45,10 @@
         {% include 'coins/coins.html' %}
       </tbody>
     </table>
-    <button type="button" id="load-more-btn" data-page="2" class="btn btn-block btn-primary">Load more</button>
+    <div class="text-center">
+      <button style="border-radius:15px; font-weight:700;" type="button" id="load-more-btn" data-page="2" class="btn btn-primary">Load more</button>
+    </div>
+
   </div>
 
 </body>
