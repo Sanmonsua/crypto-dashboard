@@ -26,7 +26,7 @@ SECRET_KEY = 'w5p5u3gy6t31b&!@nmm3-@1&t!e2i8it0s-3pitowl=kho+@8h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', ' crypto-dashboard-sanmonsua.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'crypto-dashboard-sanmonsua.herokuapp.com']
 
 
 # Application definition
